@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_architecture/repositories/user_repo/user_services.dart';
+import 'package:flutter_mvvm_architecture/repositories/user/user_services.dart';
 import 'package:flutter_mvvm_architecture/services/network/base_services.dart';
 import 'package:flutter_mvvm_architecture/services/network/services.dart';
 import 'package:flutter_mvvm_architecture/view/user/user_view.dart';

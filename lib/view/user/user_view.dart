@@ -53,7 +53,7 @@ class _UserViewState extends State<UserView> {
                   }),
               TextButton(
                   onPressed: () {
-                    userProvider.getCompleteDetails(loaderStateEnabled: false);
+                    userProvider.getCompleteDetails(loaderStateEnabled: true);
                   },
                   child: const Text("Refresh")),
             ],

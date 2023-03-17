@@ -1,7 +1,7 @@
 import 'package:either_dart/either.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mvvm_architecture/model/user/user.dart';
-import 'package:flutter_mvvm_architecture/repositories/user_repo/user_services.dart';
+import 'package:flutter_mvvm_architecture/repositories/user/user_services.dart';
 import 'package:flutter_mvvm_architecture/utils/provider_helper_class.dart';
 import 'package:get_it/get_it.dart';
 
