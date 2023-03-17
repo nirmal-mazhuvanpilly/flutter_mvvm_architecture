@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_architecture/model/user/user.dart';
 import 'package:flutter_mvvm_architecture/utils/common_widgets/switch_state.dart';
-import 'package:flutter_mvvm_architecture/utils/provider_helper_class.dart';
+import 'package:flutter_mvvm_architecture/utils/helpers/provider_helper_class.dart';
 import 'package:flutter_mvvm_architecture/view/user/widgets/user_details_view.dart';
 import 'package:flutter_mvvm_architecture/view_model/user/user_provider.dart';
 import 'package:provider/provider.dart';

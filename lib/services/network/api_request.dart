@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:either_dart/either.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_mvvm_architecture/res/app_constants.dart';
+import 'package:flutter_mvvm_architecture/res/app_config.dart';
 import 'package:flutter_mvvm_architecture/services/network/resposne_error.dart';
 import 'package:http/http.dart' as http;
 

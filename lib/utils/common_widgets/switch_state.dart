@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_architecture/utils/provider_helper_class.dart';
+import 'package:flutter_mvvm_architecture/utils/helpers/provider_helper_class.dart';
 
 class SwitchState extends StatelessWidget {
   final LoaderState loaderState;
