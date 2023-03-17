@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm_architecture/repositories/user_repo/user_services.dart';
+import 'package:flutter_mvvm_architecture/services/network/base_services.dart';
+import 'package:flutter_mvvm_architecture/services/network/services.dart';
+import 'package:flutter_mvvm_architecture/view/user/user_view.dart';
+import 'package:get_it/get_it.dart';
+
+void setUp() {
+  GetIt.instance.registerLazySingleton<BaseServices>(() => Services());
+  GetIt.instance.registerFactory<UserServices>(() => UserServices());
+}
 
 void main() {
+  setUp();
   runApp(const MyApp());
 }
 
@@ -10,20 +21,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: '',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Home(),
+      home: const UserView(),
     );
-  }
-}
-
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
