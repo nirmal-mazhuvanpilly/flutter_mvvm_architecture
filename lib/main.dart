@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_architecture/repositories/user/user_services.dart';
-import 'package:flutter_mvvm_architecture/services/network/base_services.dart';
-import 'package:flutter_mvvm_architecture/services/network/services.dart';
-import 'package:flutter_mvvm_architecture/view/user/user_view.dart';
+import 'package:flutter_mvvm_architecture/src/user/repo/user_repo.dart';
+import 'package:flutter_mvvm_architecture/src/user/view/user_view.dart';
 import 'package:get_it/get_it.dart';
 
 void setUp() {
-  GetIt.instance.registerLazySingleton<BaseServices>(() => Services());
-  GetIt.instance.registerFactory<UserServices>(() => UserServices());
+  GetIt.instance.registerFactory<UserRepo>(() => UserRepoImplements());
 }
 
 void main() {
