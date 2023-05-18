@@ -3,33 +3,27 @@ import 'dart:io';
 import 'package:either_dart/either.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_mvvm_architecture/data/remote/api_exceptions.dart';
+import 'package:flutter_mvvm_architecture/data/remote/http/http_functions.dart';
 import 'package:flutter_mvvm_architecture/data/remote/resposne_error.dart';
 import 'package:flutter_mvvm_architecture/res/app_config.dart';
+import 'package:flutter_mvvm_architecture/utils/helpers/common_functions.dart';
 import 'package:http/http.dart' as http;
 
 Future<Either<ResponseError, http.Response>> safe(
     Future<http.Response> request) async {
   try {
     return Right(await request);
+  } on ApiExceptions catch (error) {
+    return Left(ResponseError(key: error.errorType, message: error.message));
   } catch (e) {
     return Left(ResponseError(
-        key: Error.badRequest, message: "Request executing with errors:$e"));
+        key: ApiErrorTypes.unknown, message: "Unknown Error : $e"));
   }
 }
 
 Either<ResponseError, http.Response> checkHttpStatus(http.Response response) {
-  switch (response.statusCode) {
-    case 200:
-      return Right(response);
-    case 500:
-      return Left(ResponseError(
-          key: Error.serverError,
-          message: "Bad status ${response.statusCode}"));
-    default:
-      return Left(ResponseError(
-          key: Error.badResponse,
-          message: "Bad status ${response.statusCode}"));
-  }
+  return getStatus(response);
 }
 
 Future<Either<ResponseError, dynamic>> parseJson(http.Response response) async {
@@ -37,11 +31,14 @@ Future<Either<ResponseError, dynamic>> parseJson(http.Response response) async {
     return Right(json.decode(response.body));
   } catch (e) {
     return const Left(ResponseError(
-        key: Error.jsonParsing, message: "Failed on json parsing"));
+        key: ApiErrorTypes.jsonParsing, message: "Failed on json parsing"));
   }
 }
 
 Future<http.Response> getRequest({required String endPoint}) async {
+  if (!(await isInternetAvailable())) {
+    throw ApiExceptions.noInternet();
+  }
   dynamic response;
   try {
     final url = Uri.parse(AppConstants.baseUrl + endPoint);
@@ -52,7 +49,7 @@ Future<http.Response> getRequest({required String endPoint}) async {
     response = await http
         .get(url, headers: parameters)
         .timeout(const Duration(seconds: 30), onTimeout: () {
-      return Future.error("Failed to connect network");
+      throw ApiExceptions.oops();
     });
   } on Exception catch (error) {
     debugPrint(error.toString());

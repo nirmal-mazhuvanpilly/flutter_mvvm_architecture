@@ -1,13 +1,24 @@
-enum Error {
-  notFound,
-  badRequest,
-  serverError,
+enum ApiErrorTypes {
+  connectionTimeout,
+  sendTimeout,
+  receiveTimeout,
+  badCertificate,
   badResponse,
+  cancel,
+  connectionError,
+  unknown,
+  unAuthorized,
+  badRequest,
+  internalServerError,
+  serviceUnavailable,
+  notFound,
   jsonParsing,
+  noInternet,
+  oops,
 }
 
 class ResponseError {
-  final Error key;
+  final ApiErrorTypes key;
   final String? message;
 
   const ResponseError({
