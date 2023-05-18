@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_mvvm_architecture/src/user/model/user.dart';
 import 'package:flutter_mvvm_architecture/src/user/repo/user_repo.dart';
 import 'package:flutter_mvvm_architecture/utils/helpers/provider_helper_class.dart';
-import 'package:get_it/get_it.dart';
 
 class UserProvider extends ChangeNotifier
     with UserVariables, ProviderHelperClass {
-  final services = GetIt.instance<UserRepo>();
+  UserRepo services;
+  UserProvider({required this.services});
 
   @override
   UserModel? get userModel => _userModel;

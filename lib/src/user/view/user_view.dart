@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_architecture/src/user/model/user.dart';
+import 'package:flutter_mvvm_architecture/src/user/repo/user_repo.dart';
 import 'package:flutter_mvvm_architecture/src/user/view/widgets/user_details_view.dart';
 import 'package:flutter_mvvm_architecture/utils/common_widgets/switch_state.dart';
 import 'package:flutter_mvvm_architecture/utils/helpers/provider_helper_class.dart';
 import 'package:flutter_mvvm_architecture/src/user/view_model/user_provider.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
@@ -15,7 +17,8 @@ class UserView extends StatefulWidget {
 }
 
 class _UserViewState extends State<UserView> {
-  UserProvider userProvider = UserProvider();
+  UserProvider userProvider =
+      UserProvider(services: GetIt.instance<UserRepo>());
 
   @override
   void initState() {
