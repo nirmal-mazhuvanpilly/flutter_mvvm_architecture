@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_mvvm_architecture/data/local/hive/user_details.dart';
 import 'package:flutter_mvvm_architecture/data/local/local_storage.dart';
 import 'package:flutter_mvvm_architecture/src/user/model/user.dart';
@@ -89,20 +91,69 @@ class _UserViewState extends State<UserView> {
                       ],
                     );
                   }),
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const NewWidget(),
-                      ),
-                    );
-                  },
-                  child: const Text("Next Page")),
+              NextPageButton(userRepo: UserRepoImplements()),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class NextPageButton extends StatefulWidget {
+  final UserRepo userRepo;
+  const NextPageButton({Key? key, required this.userRepo}) : super(key: key);
+
+  @override
+  State<NextPageButton> createState() => _NextPageButtonState();
+}
+
+class _NextPageButtonState extends State<NextPageButton> {
+  @override
+  void dispose() {
+    widget.userRepo.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<LoaderState>(
+        valueListenable: widget.userRepo.navigateLoaderState,
+        builder: (context, value, child) {
+          if (value == LoaderState.loaded) {
+            // Use SchedulerBinding.instance.addPostFrameCallback(): If you want to schedule a state change after the current frame is painted,
+            // This ensures that the state change happens in the next frame, avoiding the issue of modifying the state during the build process.
+            // For example: setState() or markNeedsBuild() called during build error will throw
+
+            SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const NewWidget(),
+                ),
+              );
+            });
+          }
+          return GestureDetector(
+            onTap: () {
+              if (value == LoaderState.loading) return;
+              widget.userRepo.navigateToNextPage();
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 40,
+              width: double.maxFinite,
+              color: Colors.blue,
+              child: value == LoaderState.loading
+                  ? const Center(
+                      child: CircularProgressIndicator(color: Colors.white))
+                  : const Text(
+                      "Next Page",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+            ),
+          );
+        });
   }
 }
 
@@ -125,20 +176,31 @@ class NewWidget extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  Container(
-                    height: 500,
-                    decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [
-                              Colors.green,
-                              Colors.deepPurpleAccent,
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter),
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                "https://images.squarespace-cdn.com/content/5e55383538da6e7b34219641/1620689168715-407HF2XX7U03CFBNHEDM/VADER.jpg?content-type=image%2Fjpeg"))),
+                  CachedNetworkImage(
+                    imageUrl:
+                        "https://images.squarespace-cdn.com/content/5e55383538da6e7b34219641/1620689168715-407HF2XX7U03CFBNHEDM/VADER.jpg?content-type=image%2Fjpeg",
+                    imageBuilder: (context, imageProvider) {
+                      return Container(
+                        height: 500,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.cover, image: imageProvider)),
+                      );
+                    },
+                    placeholder: (context, url) {
+                      return Container(
+                        height: 500,
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                              colors: [
+                                Colors.pink,
+                                Colors.pinkAccent,
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter),
+                        ),
+                      );
+                    },
                   ),
                   Container(
                     height: 500,
