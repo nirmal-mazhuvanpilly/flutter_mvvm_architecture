@@ -11,7 +11,7 @@ import 'package:flutter_mvvm_architecture/utils/helpers/provider_helper_class.da
 
 abstract class UserRepo {
   Future<Either<ResponseError, UserModel?>> getDetailedResponse();
-  Future<void> navigateToNextPage();
+  Future<String?> navigateToNextPage({String? value});
 
   final ValueNotifier<LoaderState> navigateLoaderState =
       ValueNotifier(LoaderState.noData);
@@ -54,12 +54,13 @@ class UserRepoImplements extends UserRepo {
   }
 
   @override
-  Future<void> navigateToNextPage() async {
+  Future<String?> navigateToNextPage({String? value}) async {
     changeNavigateLoaderState(LoaderState.loading);
-    Future.delayed(
+    return Future.delayed(
       const Duration(seconds: 5),
       () {
         changeNavigateLoaderState(LoaderState.loaded);
+        return value;
       },
     );
   }

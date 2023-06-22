@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_architecture/data/local/hive/hive_storage.dart';
+import 'package:flutter_mvvm_architecture/src/global_view_model/app_data_provider.dart';
 import 'package:flutter_mvvm_architecture/src/user/view/user_view.dart';
+import 'package:provider/provider.dart';
 import 'di.dart';
 
 void main() async {
@@ -15,13 +17,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AppDataProvider()),
+      ],
+      child: MaterialApp(
+        title: '',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const UserView(),
       ),
-      home: const UserView(),
     );
   }
 }

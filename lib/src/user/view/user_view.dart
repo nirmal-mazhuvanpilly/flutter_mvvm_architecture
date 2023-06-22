@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_mvvm_architecture/data/local/hive/user_details.dart';
 import 'package:flutter_mvvm_architecture/data/local/local_storage.dart';
+import 'package:flutter_mvvm_architecture/src/global_view_model/app_data_provider.dart';
 import 'package:flutter_mvvm_architecture/src/user/model/user.dart';
 import 'package:flutter_mvvm_architecture/src/user/repo/user_repo.dart';
 import 'package:flutter_mvvm_architecture/src/user/view/widgets/user_details_view.dart';
@@ -117,6 +118,7 @@ class _NextPageButtonState extends State<NextPageButton> {
 
   @override
   Widget build(BuildContext context) {
+    final appDataModel = context.read<AppDataProvider>();
     return ValueListenableBuilder<LoaderState>(
         valueListenable: widget.userRepo.navigateLoaderState,
         builder: (context, value, child) {
@@ -134,9 +136,11 @@ class _NextPageButtonState extends State<NextPageButton> {
             });
           }
           return GestureDetector(
-            onTap: () {
+            onTap: () async {
               if (value == LoaderState.loading) return;
-              widget.userRepo.navigateToNextPage();
+              final res = await widget.userRepo
+                  .navigateToNextPage(value: "Rastafarian");
+              appDataModel.userName = res;
             },
             child: Container(
               alignment: Alignment.center,
@@ -164,6 +168,7 @@ class NewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appDataModel = context.read<AppDataProvider>();
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -228,7 +233,9 @@ class NewWidget extends StatelessWidget {
                   )
                 ],
               ),
-              const GetSizeWidget()
+              const GetSizeWidget(),
+              Text("User Name : ${appDataModel.userName}",
+                  style: const TextStyle(color: Colors.white))
             ],
           )
         ],
