@@ -92,7 +92,55 @@ class _UserViewState extends State<UserView> {
                       ],
                     );
                   }),
-              NextPageButton(userRepo: UserRepoImplements()),
+              NextPageButton(userRepo: GetIt.instance<UserRepo>()),
+              NextPageButton(userRepo: GetIt.instance<UserRepo>()),
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const UserView(),
+                        ));
+                  },
+                  child: const Text("User view")),
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChangeNotifierProvider.value(
+                            value: userProvider,
+                            child: Scaffold(
+                              body: Center(
+                                child: Container(
+                                  width: double.infinity,
+                                  color: Colors.red,
+                                  child: Selector<UserProvider,
+                                          Tuple2<UserModel?, LoaderState>>(
+                                      selector: (context, provider) => Tuple2(
+                                          provider.userModel,
+                                          provider.loaderState),
+                                      builder: (context, value, child) {
+                                        return SwitchState(
+                                          loaderState: value.item2,
+                                          loadingView:
+                                              const CircularProgressIndicator(),
+                                          loadedView: UserDetailsView(
+                                              userModel: value.item1),
+                                          networkErrorView:
+                                              const Text("Network Error"),
+                                          errorView: const Text("Error"),
+                                          noDataView:
+                                              const Text("No Details Found"),
+                                        );
+                                      }),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ));
+                  },
+                  child: const Text("User sub view")),
             ],
           ),
         ),
@@ -138,8 +186,8 @@ class _NextPageButtonState extends State<NextPageButton> {
           return GestureDetector(
             onTap: () async {
               if (value == LoaderState.loading) return;
-              final res = await widget.userRepo
-                  .navigateToNextPage(value: "Rastafarian");
+              final res =
+                  await widget.userRepo.navigateToNextPage(value: "Rasta");
               appDataModel.userName = res;
             },
             child: Container(

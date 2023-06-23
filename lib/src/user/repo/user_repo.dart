@@ -44,13 +44,13 @@ class UserRepoImplements extends UserRepo {
         .mapRight((right) {
       return UserModel.fromJson(right);
     });
-    return http
-        .safe(http.getRequest(endPoint: "todos/$randomNumber"))
-        .thenRight(http.checkHttpStatus)
-        .thenRight(http.parseJson)
-        .mapRight((right) {
-      return UserModel.fromJson(right);
-    });
+    // return http
+    //     .safe(http.getRequest(endPoint: "todos/$randomNumber"))
+    //     .thenRight(http.checkHttpStatus)
+    //     .thenRight(http.parseJson)
+    //     .mapRight((right) {
+    //   return UserModel.fromJson(right);
+    // });
   }
 
   @override
