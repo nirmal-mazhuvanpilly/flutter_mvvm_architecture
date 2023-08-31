@@ -1,7 +1,6 @@
 import 'package:either_dart/either.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mvvm_architecture/data/local/hive/user_details.dart';
-import 'package:flutter_mvvm_architecture/data/local/local_storage.dart';
 import 'package:flutter_mvvm_architecture/src/user/model/user.dart';
 import 'package:flutter_mvvm_architecture/src/user/repo/user_repo.dart';
 import 'package:flutter_mvvm_architecture/utils/helpers/provider_helper_class.dart';
@@ -9,8 +8,8 @@ import 'package:flutter_mvvm_architecture/utils/helpers/provider_helper_class.da
 class UserProvider extends ChangeNotifier
     with UserVariables, ProviderHelperClass {
   UserRepo services;
-  LocalStorage localStorage;
-  UserProvider({required this.services, required this.localStorage});
+
+  UserProvider({required this.services});
 
   @override
   UserModel? get userModel => _userModel;
@@ -56,9 +55,13 @@ class UserProvider extends ChangeNotifier
   }
 
   @override
-  Future<void> getUserDetails() {
-    // TODO: implement getUserDetails
-    throw UnimplementedError();
+  Future<void> getUserDetails() async {
+    services.getUserDetails();
+  }
+
+  @override
+  Future<void> addUserDetails(User user) async {
+    services.addUserDetails(user);
   }
 }
 
@@ -67,4 +70,5 @@ abstract class UserVariables {
   User? userDetails;
   Future<void> getCompleteDetails();
   Future<void> getUserDetails();
+  Future<void> addUserDetails(User user);
 }

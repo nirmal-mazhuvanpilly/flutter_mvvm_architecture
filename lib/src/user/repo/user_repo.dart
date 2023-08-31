@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm_architecture/data/local/hive/user_details.dart';
 import 'package:flutter_mvvm_architecture/data/remote/http/http_request.dart'
     as http;
 import 'package:flutter_mvvm_architecture/data/remote/dio/dio_request.dart'
@@ -8,10 +9,13 @@ import 'package:flutter_mvvm_architecture/data/remote/dio/dio_request.dart'
 import 'package:flutter_mvvm_architecture/data/remote/resposne_error.dart';
 import 'package:flutter_mvvm_architecture/src/user/model/user.dart';
 import 'package:flutter_mvvm_architecture/utils/helpers/provider_helper_class.dart';
+import 'package:hive/hive.dart';
 
 abstract class UserRepo {
   Future<Either<ResponseError, UserModel?>> getDetailedResponse();
   Future<String?> navigateToNextPage({String? value});
+  Future<void> getUserDetails();
+  Future<void> addUserDetails(User user);
 
   final ValueNotifier<LoaderState> navigateLoaderState =
       ValueNotifier(LoaderState.noData);
@@ -26,6 +30,12 @@ abstract class UserRepo {
 }
 
 class UserRepoImplements extends UserRepo {
+  Box<User>? box;
+
+  UserRepoImplements() {
+    box = Hive.box<User>('userBox');
+  }
+
   @override
   Future<Either<ResponseError, UserModel?>> getDetailedResponse() {
     Random random = Random();
@@ -63,5 +73,15 @@ class UserRepoImplements extends UserRepo {
         return value;
       },
     );
+  }
+
+  @override
+  Future<void> addUserDetails(User user) async {
+    await box?.put("CurrentUser", user);
+  }
+
+  @override
+  Future<User?> getUserDetails() async {
+    return box?.get("CurrentUser");
   }
 }

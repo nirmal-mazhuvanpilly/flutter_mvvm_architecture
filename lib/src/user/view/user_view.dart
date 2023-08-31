@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -5,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_mvvm_architecture/data/local/hive/user_details.dart';
-import 'package:flutter_mvvm_architecture/data/local/local_storage.dart';
 import 'package:flutter_mvvm_architecture/src/global_view_model/app_data_provider.dart';
 import 'package:flutter_mvvm_architecture/src/user/model/user.dart';
 import 'package:flutter_mvvm_architecture/src/user/repo/user_repo.dart';
@@ -28,10 +28,7 @@ class UserView extends StatefulWidget {
 class _UserViewState extends State<UserView> {
   UserProvider userProvider = UserProvider(
     services: GetIt.instance<UserRepo>(),
-    localStorage: GetIt.instance<LocalStorage>(),
   );
-
-  final hive = GetIt.instance<LocalStorage>();
 
   @override
   void initState() {
@@ -75,15 +72,15 @@ class _UserViewState extends State<UserView> {
               TextButton(
                   onPressed: () async {
                     final user = User(
-                      name: "Nirmal M M",
-                      age: 25,
+                      name: "Nirmal Mazhuvanpilly",
+                      age: Random().nextInt(40),
                       friends: [
                         "Risto",
                         "Laiju",
                       ],
                     );
-                    hive.addUserDetails(user);
-                    hive.getUserDetails().then((value) {});
+
+                    userProvider.addUserDetails(user);
                   },
                   child: const Text("Add")),
               ValueListenableBuilder<Box>(
@@ -175,25 +172,19 @@ class _NextPageButtonState extends State<NextPageButton> {
     return ValueListenableBuilder<LoaderState>(
         valueListenable: widget.userRepo.navigateLoaderState,
         builder: (context, value, child) {
-          if (value == LoaderState.loaded) {
-            // Use SchedulerBinding.instance.addPostFrameCallback(): If you want to schedule a state change after the current frame is painted,
-            // This ensures that the state change happens in the next frame, avoiding the issue of modifying the state during the build process.
-            // For example: setState() or markNeedsBuild() called during build error will throw
-
-            SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => NewWidget(),
-                ),
-              );
-            });
-          }
           return GestureDetector(
             onTap: () async {
               if (value == LoaderState.loading) return;
               final res =
                   await widget.userRepo.navigateToNextPage(value: "Rasta");
               appDataModel.userName = res;
+              SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => NewWidget(),
+                  ),
+                );
+              });
             },
             child: Container(
               alignment: Alignment.center,
