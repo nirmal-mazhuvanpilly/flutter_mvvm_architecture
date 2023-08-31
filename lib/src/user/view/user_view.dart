@@ -125,8 +125,9 @@ class _UserViewState extends State<UserView> {
                                       builder: (context, value, child) {
                                         return SwitchState(
                                           loaderState: value.item2,
-                                          loadingView:
-                                              const CircularProgressIndicator(),
+                                          loadingView: const Center(
+                                              child:
+                                                  CircularProgressIndicator()),
                                           loadedView: UserDetailsView(
                                               userModel: value.item1),
                                           networkErrorView:

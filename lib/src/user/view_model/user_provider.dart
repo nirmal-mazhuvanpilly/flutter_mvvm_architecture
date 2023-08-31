@@ -7,6 +7,8 @@ import 'package:flutter_mvvm_architecture/utils/helpers/provider_helper_class.da
 
 class UserProvider extends ChangeNotifier
     with UserVariables, ProviderHelperClass {
+  bool _isDisposed = false;
+
   UserRepo services;
 
   UserProvider({required this.services});
@@ -23,6 +25,18 @@ class UserProvider extends ChangeNotifier
   void updateLoadState(LoaderState state) {
     loaderState = state;
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _isDisposed = true;
+    super.dispose();
+  }
+
+  @override
+  void notifyListeners() {
+    if (_isDisposed) return;
+    super.notifyListeners();
   }
 
   @override
