@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_architecture/data/local/hive/hive_storage.dart';
 import 'package:flutter_mvvm_architecture/src/global_view_model/app_data_provider.dart';
-import 'package:flutter_mvvm_architecture/src/user/view/user_view.dart';
+import 'package:flutter_mvvm_architecture/utils/routes/route_generator.dart';
 import 'package:provider/provider.dart';
 import 'di.dart';
 
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const UserView(),
+        onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );
   }

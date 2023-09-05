@@ -30,7 +30,7 @@ abstract class UserRepo {
 }
 
 class UserRepoImplements extends UserRepo {
-  Box<User>? box;
+  late final Box<User>? box;
 
   UserRepoImplements() {
     box = Hive.box<User>('userBox');
