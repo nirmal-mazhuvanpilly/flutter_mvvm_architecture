@@ -3,6 +3,7 @@ import 'package:flutter_mvvm_architecture/src/counter/view/counter_scoped_screen
 import 'package:flutter_mvvm_architecture/src/counter/view/counter_screen.dart';
 import 'package:flutter_mvvm_architecture/src/home/view/home_screen.dart';
 import 'package:flutter_mvvm_architecture/src/passenger/view/passenger_screen.dart';
+import 'package:flutter_mvvm_architecture/src/study_material/view/feed_screen.dart';
 import 'package:flutter_mvvm_architecture/utils/common_widgets/empty_screen.dart';
 import 'package:flutter_mvvm_architecture/utils/routes/arguments/counter_arguments.dart';
 import 'package:flutter_mvvm_architecture/utils/routes/route_constants.dart';
@@ -26,6 +27,8 @@ class RouteGenerator {
       case RouteConstants.routePassengerScreen:
         return _buildRoute(
             RouteConstants.routePassengerScreen, const PassengerScreen());
+      case RouteConstants.routeFeedScreen:
+        return _buildRoute(RouteConstants.routeFeedScreen, const FeedScreen());
 
       default:
         return _buildRoute(

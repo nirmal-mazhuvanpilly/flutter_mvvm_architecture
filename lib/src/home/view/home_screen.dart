@@ -26,6 +26,12 @@ class HomeScreen extends StatelessWidget {
                         .pushNamed(RouteConstants.routePassengerScreen);
                   },
                   child: const Text("Passenger")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushNamed(RouteConstants.routeFeedScreen);
+                  },
+                  child: const Text("Study Material")),
             ],
           ),
         ),
