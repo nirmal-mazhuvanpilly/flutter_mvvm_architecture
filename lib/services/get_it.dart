@@ -10,5 +10,5 @@ GetIt getIt = GetIt.instance;
 Future<void> setupLocator() async {
   getIt.registerLazySingleton<LocalBaseServices>(() => HiveServices());
   getIt.registerLazySingleton<NetWorkBaseServices>(() => NetworkServices());
-  getIt.registerFactory<PassengerRepo>(() => PassengerRepoImplements());
+  getIt.registerLazySingleton<PassengerRepo>(() => PassengerRepoImplements());
 }

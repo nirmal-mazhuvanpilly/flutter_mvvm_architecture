@@ -42,7 +42,7 @@ The following technologies and tools are used to build and maintain the Mobile A
 ---
 
 ### **Directory Structure**
-
+```
 │
 ├── README.md                 # Project documentation
 ├── CHANGELOG.md              # Version history and changes
@@ -80,6 +80,7 @@ The following technologies and tools are used to build and maintain the Mobile A
 │   ├── images/
 │   ├── icons/
 │   └── fonts/
+```
 
 ## Naming Conventions
 
