@@ -43,12 +43,6 @@ class _ProductDetailImageSliderState extends State<ProductDetailImageSlider> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    widget.controller.dispose();
-    super.dispose();
-  }
-
   void _listenController() {
     widget.controller.addListener(() {
       page = widget.controller.page!.round();

@@ -20,7 +20,17 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Riverpod',
-        theme: ThemeData(primarySwatch: Colors.blue),
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          pageTransitionsTheme: const PageTransitionsTheme(
+            builders: <TargetPlatform, PageTransitionsBuilder>{
+              TargetPlatform.android: ZoomPageTransitionsBuilder(
+                  allowEnterRouteSnapshotting: false),
+              TargetPlatform.iOS: ZoomPageTransitionsBuilder(
+                  allowEnterRouteSnapshotting: false),
+            },
+          ),
+        ),
         initialRoute: RouteConstants.routeInitialScreen,
         onGenerateRoute: RouteGenerator.generateRoute,
         navigatorKey: navigatorKey,

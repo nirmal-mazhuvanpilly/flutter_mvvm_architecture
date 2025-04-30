@@ -8,4 +8,5 @@ class AppConstants {
 
   static const String refreshTokenApi = "refresh_token";
   static const String passengerList = "passenger?size=10&";
+  static const String feed = "";
 }

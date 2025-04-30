@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_architecture/src/study_material/view/tab_one.dart';
+import 'package:flutter_mvvm_architecture/src/study_material/view/widgets/tabs/tab_four.dart';
+import 'package:flutter_mvvm_architecture/src/study_material/view/widgets/tabs/tab_one.dart';
+import 'package:flutter_mvvm_architecture/src/study_material/view/widgets/tabs/tab_three.dart';
+import 'package:flutter_mvvm_architecture/src/study_material/view/widgets/tabs/tab_two.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({super.key});
@@ -81,17 +84,11 @@ class _FeedScreenState extends State<FeedScreen>
                 dividerColor: Colors.white,
               ),
               Expanded(
-                  child: TabBarView(controller: tabController, children: [
+                  child: TabBarView(controller: tabController, children: const [
                 TabOne(),
-                Container(
-                  color: Colors.yellow,
-                ),
-                Container(
-                  color: Colors.green,
-                ),
-                Container(
-                  color: Colors.blue,
-                ),
+                TabTwo(),
+                TabThree(),
+                TabFour(),
               ]))
             ],
           ),
