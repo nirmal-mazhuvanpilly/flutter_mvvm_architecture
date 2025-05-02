@@ -1,3 +1,5 @@
+import 'package:flutter_mvvm_architecture/utils/helpers/type_convertors.dart';
+
 class FeedModel {
   final int? channelId;
   final String? channelName;
@@ -12,7 +14,7 @@ class FeedModel {
   final String? shareText;
   final String? shareLink;
   final String? shareImage;
-  final String? imageSize;
+  final int? imageSize;
   final List<String>? postImage;
   final Youtube? youtube;
   final Video? video;
@@ -68,36 +70,34 @@ class FeedModel {
   });
 
   factory FeedModel.fromJson(Map<String, dynamic> json) => FeedModel(
-        channelId: json["channel_id"],
-        channelName: json["channel_name"],
-        channelThumbnail: json["channel_thumbnail"],
-        id: json["id"],
-        description: json["description"],
-        postType: json["post_type"],
-        buttonText: json["button_text"],
-        buttonColor: json["button_color"],
-        linkOpen: json["link_open"],
-        link: json["link"],
-        shareText: json["share_text"],
-        shareLink: json["share_link"],
-        shareImage: json["share_image"],
-        imageSize: json["image_size"],
-        postImage: json["post_image"] == null
-            ? null
-            : List<String>.from(json["post_image"].map((x) => x)),
+        channelId: convertToInt(json["channel_id"]),
+        channelName: convertToString(json["channel_name"]),
+        channelThumbnail: convertToString(json["channel_thumbnail"]),
+        id: convertToInt(json["id"]),
+        description: convertToString(json["description"]),
+        postType: convertToString(json["post_type"]),
+        buttonText: convertToString(json["button_text"]),
+        buttonColor: convertToString(json["button_color"]),
+        linkOpen: convertToString(json["link_open"]),
+        link: convertToString(json["link"]),
+        shareText: convertToString(json["share_text"]),
+        shareLink: convertToString(json["share_link"]),
+        shareImage: convertToString(json["share_image"]),
+        imageSize: convertToInt(json["image_size"]),
+        postImage: convertToList<String>(json["post_image"]),
         youtube:
             json["youtube"] == null ? null : Youtube.fromJson(json["youtube"]),
         video: json["video"] == null ? null : Video.fromJson(json["video"]),
-        hashtags: json["hashtags"],
-        postCategory: json["post_category"],
-        whatsappJoinStatus: json["whatsapp_join_status"],
-        channelSubscribed: json["channel_subscribed"],
-        createdAt: json["created_at"],
-        listingOrder: json["listing_order"],
-        publish: json["publish"],
-        totalShares: json["total_shares"],
-        totalLikes: json["total_likes"],
-        totalSaves: json["total_saves"],
+        hashtags: convertToString(json["hashtags"]),
+        postCategory: convertToString(json["post_category"]),
+        whatsappJoinStatus: convertToBool(json["whatsapp_join_status"]),
+        channelSubscribed: convertToBool(json["channel_subscribed"]),
+        createdAt: convertToString(json["created_at"]),
+        listingOrder: convertToInt(json["listing_order"]),
+        publish: convertToBool(json["publish"]),
+        totalShares: convertToInt(json["total_shares"]),
+        totalLikes: convertToInt(json["total_likes"]),
+        totalSaves: convertToInt(json["total_saves"]),
         university: json["university"] == null
             ? null
             : Course.fromJson(json["university"]),
@@ -121,9 +121,9 @@ class Audio {
   });
 
   factory Audio.fromJson(Map<String, dynamic> json) => Audio(
-        duration: json["duration"],
-        thumbnail: json["thumbnail"],
-        audioLink: json["audio_link"],
+        duration: convertToString(json["duration"]),
+        thumbnail: convertToString(json["thumbnail"]),
+        audioLink: convertToString(json["audio_link"]),
       );
 }
 
@@ -137,8 +137,8 @@ class Course {
   });
 
   factory Course.fromJson(Map<String, dynamic> json) => Course(
-        id: json["id"],
-        name: json["name"],
+        id: convertToInt(json["id"]),
+        name: convertToString(json["name"]),
       );
 }
 
@@ -154,9 +154,9 @@ class Video {
   });
 
   factory Video.fromJson(Map<String, dynamic> json) => Video(
-        thumbnail: json["thumbnail"],
-        videoLink: json["video_link"],
-        videoSize: json["video_size"],
+        thumbnail: convertToString(json["thumbnail"]),
+        videoLink: convertToString(json["video_link"]),
+        videoSize: convertToString(json["video_size"]),
       );
 }
 
@@ -170,7 +170,7 @@ class Youtube {
   });
 
   factory Youtube.fromJson(Map<String, dynamic> json) => Youtube(
-        thumbnail: json["thumbnail"],
-        youtubeLink: json["youtube_link"],
+        thumbnail: convertToString(json["thumbnail"]),
+        youtubeLink: convertToString(json["youtube_link"]),
       );
 }

@@ -30,52 +30,61 @@ class _FeedScreenState extends State<FeedScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leadingWidth: double.maxFinite,
-        leading: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
-            const Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Heading"),
-                  Text("SubHeading"),
-                ],
-              ),
-            )
-          ],
-        ),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-          IconButton(
-              onPressed: () {}, icon: const Icon(Icons.notifications_none)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
-        ],
-      ),
+      // appBar: AppBar(
+      //   automaticallyImplyLeading: false,
+      //   leadingWidth: double.maxFinite,
+      //   leading: Row(
+      //     mainAxisSize: MainAxisSize.max,
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     crossAxisAlignment: CrossAxisAlignment.center,
+      //     children: [
+      //       IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+      //       const Expanded(
+      //         child: Column(
+      //           crossAxisAlignment: CrossAxisAlignment.start,
+      //           mainAxisAlignment: MainAxisAlignment.center,
+      //           children: [
+      //             Text("Heading"),
+      //             Text("SubHeading"),
+      //           ],
+      //         ),
+      //       )
+      //     ],
+      //   ),
+      //   actions: [
+      //     IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+      //     IconButton(
+      //         onPressed: () {}, icon: const Icon(Icons.notifications_none)),
+      //     IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
+      //   ],
+      // ),
       body: SafeArea(
         child: Center(
           child: Column(
             children: [
+              const SizedBox(
+                height: 20,
+              ),
               TabBar(
                 controller: tabController,
+                isScrollable: true,
+                tabAlignment: TabAlignment.start,
+                labelStyle: const TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.w600),
+                unselectedLabelStyle: const TextStyle(
+                    color: Colors.grey, fontWeight: FontWeight.w600),
                 tabs: const [
                   Tab(
-                    child: Text("Tab One"),
+                    child: Text("  Stories  "),
                   ),
                   Tab(
-                    child: Text("Tab Two"),
+                    child: Text("  Events  "),
                   ),
                   Tab(
-                    child: Text("Tab Three"),
+                    child: Text("  Placements  "),
                   ),
                   Tab(
-                    child: Text("Tab Four"),
+                    child: Text("  Scholarships  "),
                   ),
                 ],
                 indicatorSize: TabBarIndicatorSize.tab,
