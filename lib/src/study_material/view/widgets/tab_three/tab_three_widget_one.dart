@@ -104,9 +104,8 @@ class _TabThreeWidgetOneState extends State<TabThreeWidgetOne> {
               },
             ));
           },
-          child: ProductDetailImageSlider(
+          child: ImageSlider(
             controller: pageController,
-            images: images,
           ),
         ),
         Padding(

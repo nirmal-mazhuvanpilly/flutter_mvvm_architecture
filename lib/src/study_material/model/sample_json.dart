@@ -1,11 +1,12 @@
 final List<Map<String, dynamic>> sampleJson = [
   {
     "channel_id": 1,
-    "channel_name": "Admin",
+    "channel_name": "Nirmal",
     "channel_thumbnail":
-        "https://ik.imagekit.io/imageurl/7309670_24UoqelD8.jpg",
+        "https://images.pexels.com/photos/1081685/pexels-photo-1081685.jpeg?auto=compress&cs=tinysrgb&w=1200",
     "id": 5,
-    "description": "",
+    "description":
+        "A stunning view of a golden-orange sunset casting warm hues across the sky, while the sun dips behind a range of dark, silhouetted mountains. Wispy clouds reflect shades of pink and purple. In the foreground, pine trees stand in quiet contrast, adding depth to the serene landscape. The atmosphere feels calm, quiet, and introspective.",
     "post_type": "normal",
     "button_text": "Open",
     "button_color": "FF6961",
@@ -14,8 +15,11 @@ final List<Map<String, dynamic>> sampleJson = [
     "share_text": "This is a sample sharing text",
     "share_link": "www.testsharinglink.com",
     "share_image": "",
-    "image_size": "",
-    "post_image": ["https://ik.imagekit.io/imageurl/1x_Qrkyf0gCMt.png"],
+    "image_size": "1",
+    "post_image": [
+      "https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    ],
     "youtube": {"thumbnail": "", "youtube_link": ""},
     "video": {"thumbnail": "", "video_link": "", "video_size": ""},
     "hashtags": "#CC",
@@ -36,23 +40,30 @@ final List<Map<String, dynamic>> sampleJson = [
   },
   {
     "channel_id": 2,
-    "channel_name": "Admin",
+    "channel_name": "Sreejith",
     "channel_thumbnail":
         "https://ik.imagekit.io/imageurl/7309670_24UoqelD8.jpg",
     "id": 5,
-    "description": "",
-    "post_type": "normal",
+    "description":
+        "A high-resolution thumbnail featuring a juicy, perfectly seared steak on a hot grill, with flames rising in the background. Text overlay in bold reads “Perfect Steak Every Time!” in white with a red outline. The chef’s hands holding tongs are slightly blurred for motion effect. Bright and eye-catching color grading enhances the appeal for viewers.",
+    "post_type": "video",
     "button_text": "Open",
     "button_color": "FF6961",
-    "link_open": "none",
+    "link_open": "inside",
     "link": "",
     "share_text": "This is a sample sharing text",
     "share_link": "www.testsharinglink.com",
     "share_image": "",
-    "image_size": "",
+    "image_size": "2",
     "post_image": ["https://ik.imagekit.io/imageurl/1x_Qrkyf0gCMt.png"],
     "youtube": {"thumbnail": "", "youtube_link": ""},
-    "video": {"thumbnail": "", "video_link": "", "video_size": ""},
+    "video": {
+      "thumbnail":
+          "https://images.pexels.com/photos/31452654/pexels-photo-31452654/free-photo-of-checkered-pattern-on-car-tail-light-under-rain.jpeg",
+      "video_link":
+          "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
+      "video_size": ""
+    },
     "hashtags": "#CC",
     "post_category": "Stories,Events,Placements,Scholarships",
     "whatsapp_join_status": false,
@@ -71,22 +82,27 @@ final List<Map<String, dynamic>> sampleJson = [
   },
   {
     "channel_id": 3,
-    "channel_name": "Admin",
+    "channel_name": "Sreenath",
     "channel_thumbnail":
         "https://ik.imagekit.io/imageurl/7309670_24UoqelD8.jpg",
     "id": 5,
-    "description": "",
-    "post_type": "normal",
+    "description":
+        "A scenic snapshot from the video showing a traveler standing on a rock, arms outstretched, facing a cascading jungle waterfall in Bali. Mist floats around the greenery, and the sunlight beams through the trees. Natural, untouched feel with no text overlay, reflecting an authentic travel experience.",
+    "post_type": "youtube",
     "button_text": "Open",
     "button_color": "FF6961",
-    "link_open": "none",
+    "link_open": "outside",
     "link": "",
     "share_text": "This is a sample sharing text",
     "share_link": "www.testsharinglink.com",
     "share_image": "",
-    "image_size": "",
+    "image_size": "3",
     "post_image": ["https://ik.imagekit.io/imageurl/1x_Qrkyf0gCMt.png"],
-    "youtube": {"thumbnail": "", "youtube_link": ""},
+    "youtube": {
+      "thumbnail":
+          "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "youtube_link": "https://www.youtube.com/watch?v=egvqvgvhV4c"
+    },
     "video": {"thumbnail": "", "video_link": "", "video_size": ""},
     "hashtags": "#CC",
     "post_category": "Stories,Events,Placements,Scholarships",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm_architecture/src/study_material/model/feed_model.dart';
 import 'package:flutter_mvvm_architecture/src/study_material/repo/feed_repo.dart';
 import 'package:flutter_mvvm_architecture/src/study_material/view/widgets/tab_one/tab_one_widget_one.dart';
 import 'package:flutter_mvvm_architecture/src/study_material/view_model/tab_one_feed_view_model.dart';
@@ -37,17 +38,23 @@ class _TabOneState extends State<TabOne> {
       value: feedViewModel,
       child: RefreshIndicator(
         onRefresh: () async {
+          feedViewModel.clearFeedData();
           feedViewModel.getFeeds();
         },
-        child: ListView(
-          controller: scrollController,
-          children: const [
-            TabOneWidgetOne(),
-            TabOneWidgetOne(),
-            TabOneWidgetOne(),
-            TabOneWidgetOne(),
-          ],
-        ),
+        child: Selector<TabOneFeedViewModel, List<FeedModel>>(
+            selector: (context, provider) => provider.feedList,
+            builder: (context, value, child) {
+              return ListView.builder(
+                controller: scrollController,
+                itemCount: value.length,
+                itemBuilder: (context, index) {
+                  final item = value.elementAt(index);
+                  return TabOneWidgetOne(
+                    feedModel: item,
+                  );
+                },
+              );
+            }),
       ),
     );
   }

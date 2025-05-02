@@ -44,7 +44,7 @@ class TabTwoFeedViewModel extends AutoDisposeViewModel with FeedStates {
 
   updateTabOneData(List<FeedModel>? data, bool isPaginating) {
     if (data != null) {
-      final tempList = data ?? [];
+      final tempList = data;
 
       if (tempList.isNotEmpty) {
         feedList = [...feedList, ...tempList];

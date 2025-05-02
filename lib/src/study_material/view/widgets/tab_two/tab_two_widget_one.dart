@@ -104,9 +104,8 @@ class _TabTwoWidgetOneState extends State<TabTwoWidgetOne> {
               },
             ));
           },
-          child: ProductDetailImageSlider(
+          child: ImageSlider(
             controller: pageController,
-            images: images,
           ),
         ),
         Padding(
